@@ -142,19 +142,12 @@ Multi-point tool. Both raw automated `count` and post-review
 
 ## Methods text (paste-ready)
 
-> Iba1+ microglia were quantified using a semi-automated Fiji/Python
-> pipeline. ROIs were manually drawn in Fiji. The Iba1 channel was processed
-> with rolling-ball background correction, median denoising, soma-enhancing
-> morphological opening combined with Difference-of-Gaussians filtering,
-> blob-based seed detection at a fixed absolute threshold, marker-controlled
-> watershed restricted to soma candidate regions, and object filtering by
-> area and mean / peak intensity. Detection parameters were optimized on
-> representative images and fixed for all images within the same staining
-> and imaging batch. Detections were visually inspected on overlay images
-> and obvious false positives or false negatives were corrected under
-> blinded conditions when necessary. Cell density was reported as Iba1+
-> cell bodies per ROI area (cells/mm²); Iba1+ area fraction and
-> fluorescence intensity were reported as supporting measurements.
+> Iba1+ microglia were quantified using Iba1Counter, a semi-automated
+> Fiji/Python pipeline. Cell bodies were detected by background correction,
+> soma-enhancing DoG filtering, fixed-threshold blob seed detection,
+> and marker-controlled watershed; detection parameters were fixed
+> within each staining/imaging batch.
+> Density is reported as cells/mm² (Iba1+ area fraction).
 
 ## License
 
