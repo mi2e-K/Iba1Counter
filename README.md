@@ -156,31 +156,10 @@ Multi-point tool. Both raw automated `count` and post-review
 > cell bodies per ROI area (cells/mm²); Iba1+ area fraction and
 > fluorescence intensity were reported as supporting measurements.
 
-## Documentation
-
-- [Fiji macro install + usage](fiji_macro/README.md)
-- [Fiji ROI export](docs/fiji_roi_export.md)
-- [Parameter tuning](docs/parameter_tuning.md)
-- [Validation plan](docs/validation.md)
-- [日本語ユーザーガイド](docs/user_guide_ja.md)
-
-## Repository layout
-
-```
-analyze_iba1_microglia.py    # CLI entry point
-config_example.yaml          # annotated config template
-iba1_pipeline/               # core Python package
-fiji_macro/                  # Fiji front-end (.ijm + guide)
-examples/                    # CSV templates (manual counts, corrections, metadata)
-docs/                        # extended docs
-tests/                       # smoke tests + macro syntax sweeps
-```
-
 ## License
 
-[Choose a license — MIT recommended for research tools.]
+MIT
 
 ## Citation
 
-If you use Iba1Counter in published work, please cite this repository and
-the relevant Methods text above.
+If you use Iba1Counter in published work, please cite this repository.
