@@ -143,7 +143,7 @@ Multi-point tool. Both raw automated `count` and post-review
 ## Methods text (paste-ready)
 
 > Iba1+ microglia were quantified using Iba1Counter, a semi-automated
-> Fiji/Python pipeline. Cell bodies were detected by background correction,
+> Fiji/Python pipeline (https://github.com/mi2e-K/Iba1Counter). Cell bodies were detected by background correction,
 > soma-enhancing DoG filtering, fixed-threshold blob seed detection,
 > and marker-controlled watershed; detection parameters were fixed
 > within each staining/imaging batch.
