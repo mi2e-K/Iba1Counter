@@ -160,8 +160,7 @@ all accepted detection centroids inside the marked region.
 > as microglia when they met absolute thresholds on area, mean and peak
 > intensity.
 > All thresholds were fixed within
-> each staining/imaging batch — no per-image adaptive normalisation was
-> applied — so that intergroup density differences reflect biology
+> each staining/imaging batch so that intergroup density differences reflect biology
 > rather than per-image rescaling. Detections were reviewed visually
 > and manually corrected under blinded conditions when needed. Density
 > (cells/mm²) and Iba1+ area fraction are reported.
@@ -181,7 +180,7 @@ tests/                       # smoke tests + macro syntax sweeps
 
 ## License
 
-[Choose a license — MIT recommended for research tools.]
+MIT
 
 ## Citation
 
