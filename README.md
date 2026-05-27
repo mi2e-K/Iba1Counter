@@ -73,13 +73,16 @@ Background correction (rolling-ball | morph opening | gaussian | external)
    ↓
 Mild denoising (median / gaussian)
    ↓
+Auto hole / edge suppression (gradient + dark-region masks, optional)
+   ↓
 Soma enhancement (morphological opening + DoG / LoG / top-hat)
    ↓
-Seed detection (peak_local_max with FIXED absolute threshold)
+Seed detection (peak_local_max with FIXED absolute threshold; multiscale optional)
    ↓
 Marker-controlled watershed restricted to soma mask
    ↓ + per-seed distance cap
-Object filtering (area + intensity primary; circularity / solidity optional)
+Object filtering (area + intensity + shape + intensity-uniformity;
+                  per-candidate exemption for enlarged bright soma)
    ↓
 CSVs + per-image QC overlays
 ```
@@ -92,13 +95,13 @@ CSVs + per-image QC overlays
 ├── input/                  # your TIFFs
 ├── rois/                   # Fiji ROI Manager .zip per image
 └── output/
-    ├── image_summary.csv   # one row per (image, ROI) — primary result
+    ├── detection_summary.csv  # one row per (image, ROI) — primary result
     ├── per_object.csv      # one row per candidate (accepted + rejected)
     ├── parameters.yaml     # frozen config + library versions (reproducible)
     ├── run.log
     └── qc_overlays/
         ├── <image>__<roi>.png   # full overlay (raw + ROI + accepts + rejects + scale bar)
-        └── <image>_qc.png        # clean overlay (BG-corrected green channel + outline circles)
+        └── <image>_qc.png        # clean overlay (raw image + green LUT + semi-transparent cyan circles)
 ```
 
 ## Tuning
@@ -140,19 +143,47 @@ in the macro to add missed cells / remove false positives via the
 Multi-point tool. Both raw automated `count` and post-review
 `count_corrected` are preserved for audit.
 
+Correction ROIs can also be supplied directly in the config via
+`corrections.remove_roi_directory` and `corrections.add_roi_directory`.
+Point ROIs remove/add individual detections; polygon/oval remove ROIs remove
+all accepted detection centroids inside the marked region.
+
 ## Methods text (paste-ready)
 
 > Iba1+ microglia were quantified using Iba1Counter, a semi-automated
-> Fiji/Python pipeline (https://github.com/mi2e-K/Iba1Counter). Cell bodies were detected by background correction,
-> soma-enhancing DoG filtering, fixed-threshold blob seed detection,
-> and marker-controlled watershed; detection parameters were fixed
-> within each staining/imaging batch.
-> Density is reported as cells/mm² (Iba1+ area fraction).
+> Fiji/Python pipeline (https://github.com/mi2e-K/Iba1Counter). ROIs were
+> manually drawn in Fiji. Within each ROI, tissue holes and sharp
+> intensity gradients were auto-detected from the raw image and masked
+> out prior to detection. Cell bodies were then detected by background
+> correction, soma-enhancing DoG filtering, fixed-threshold blob seed
+> detection, and marker-controlled watershed. Candidates were accepted
+> as microglia when they met absolute thresholds on area, mean and peak
+> intensity.
+> All thresholds were fixed within
+> each staining/imaging batch — no per-image adaptive normalisation was
+> applied — so that intergroup density differences reflect biology
+> rather than per-image rescaling. Detections were reviewed visually
+> and manually corrected under blinded conditions when needed. Density
+> (cells/mm²) and Iba1+ area fraction are reported.
+
+
+## Repository layout
+
+```
+analyze_iba1_microglia.py    # CLI entry point
+config_example.yaml          # annotated config template
+iba1_pipeline/               # core Python package
+fiji_macro/                  # Fiji front-end (.ijm + guide)
+examples/                    # CSV templates (manual counts, corrections, metadata)
+docs/                        # extended docs
+tests/                       # smoke tests + macro syntax sweeps
+```
 
 ## License
 
-MIT
+[Choose a license — MIT recommended for research tools.]
 
 ## Citation
 
-If you use Iba1Counter in published work, please cite this repository.
+If you use Iba1Counter in published work, please cite this repository and
+the relevant Methods text above.
