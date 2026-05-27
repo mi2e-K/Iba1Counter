@@ -161,8 +161,7 @@ all accepted detection centroids inside the marked region.
 > intensity.
 > All thresholds were fixed within
 > each staining/imaging batch so that intergroup density differences reflect biology
-> rather than per-image rescaling. Detections were reviewed visually
-> and manually corrected under blinded conditions when needed. Density
+> rather than per-image rescaling. Density
 > (cells/mm²) and Iba1+ area fraction are reported.
 
 
