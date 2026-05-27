@@ -160,8 +160,7 @@ all accepted detection centroids inside the marked region.
 > as microglia when they met absolute thresholds on area, mean and peak
 > intensity.
 > All thresholds were fixed within
-> each staining/imaging batch so that intergroup density differences reflect biology
-> rather than per-image rescaling. Density
+> each staining/imaging batch. Density
 > (cells/mm²) and Iba1+ area fraction are reported.
 
 
